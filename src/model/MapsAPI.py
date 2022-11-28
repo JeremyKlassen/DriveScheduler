@@ -27,4 +27,5 @@ def apiToJSON ():
     with open("src/model/times.json", "w") as outfile:
         json.dump(apiCall(), outfile)
 
-apiToJSON()
+if __name__ == '__main__':
+    apiToJSON()
