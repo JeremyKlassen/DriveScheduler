@@ -1,7 +1,12 @@
+# API constants
 BASE_URL = "https://api.traveltimeapp.com/v4/routes/V4/routes"
 API_ID = "e4519f0a"
 API_KEY = "db04e55a43e11768c3ba45fba5736975"
 
+# Database constants
+DBPATH = 'src/model/main.db'
+
+# Temp/Test constants
 GET_EXAMPLE = """https://api.traveltimeapp.com/v4/routes
 ?type=public_transport
 &origin_lat=51.41070
