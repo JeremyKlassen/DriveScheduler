@@ -3,7 +3,7 @@ class View():
         pass
 
     def mainView(self):
-        menuOption = input("1: make list , 2: to add/remove people from database, 3: to initialize Database, 4: to update distances/times")
+        menuOption = input("1: make list , 2: to add/remove people from database, 3: to initialize Database, 4: to update distances/times, 5: to Change API Keys ")
         return menuOption
 
     def addUsersView(clients, drivers):
@@ -26,3 +26,9 @@ class View():
                 looper = False
                 print("Session completed")
 
+    def changeKeysView(self):
+        print("If no change is required then leave entry blank")
+        newAPI_ID = input("Enter Travel Time App ID: ")
+        newAPI_KEY = input("Enter Travel Time Key: ")
+        newPC_KEY = input("Enter Open Weather App Key: ")
+        return [newAPI_ID,newAPI_KEY,newPC_KEY]
