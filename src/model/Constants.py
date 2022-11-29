@@ -17,6 +17,15 @@ GET_EXAMPLE = """https://api.traveltimeapp.com/v4/routes
 &app_id=YOUR_APP_ID
 &api_key=YOUR_API_KEY"""
 
+TIME_FILTER = f"""https://api.traveltimeapp.com/v4/time-filter\
+?type=driving\
+&arrival_time=2022-11-18T16:00:00Z\
+&search_lat=51.41070\
+&search_lng=-0.15540\
+&locations=51.45974_-0.16531,51.41494_-0.12492\
+&app_id={C.API_ID}\
+&api_key={C.API_KEY}"""
+
 POST_EXAMPLE = """POST /v4/routes HTTP/1.1
 Host: api.traveltimeapp.com
 Content-Type: application/json
