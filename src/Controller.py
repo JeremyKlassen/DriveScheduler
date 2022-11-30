@@ -1,19 +1,28 @@
-# from model.Constants import Constants as C
 from model.DB import DB
-from view.View import View
+from model.DB import Constants as C
+import model.DistanceAPI as DApi
+import model.PCConverterAPI as PCApi
+
+from view.View import View as V
 
 class Controller:
     def __init__(self):
-        pass
+        self.C = C()
+        self.DB = DB()
+        self.V = V()
 
-    def triggerChangeAPI(self):
-        keys = View.changeKeysView(self)
-        DB.changeKey(self,keys=keys)
+    def triggerChangeKeys(self):
+        keys = self.V.changeKeysView()
+        print(keys)
+        self.DB.changeKey(keys)
+
+    def triggerCreateDB(self):
+        self.DB.createDB()
 
     def main (self):
         print("Hello World")
 
 if __name__ == '__main__':
     cont = Controller()
-    # cont.triggerChangeAPI()
-    print(DB.getAPIKeys)
+    # cont.triggerCreateDB()
+    cont.triggerChangeKeys()

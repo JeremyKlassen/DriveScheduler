@@ -1,6 +1,6 @@
-import Constants as C
 import json
 import requests
+from model.DB import Constants as C
 
 class PCConverterAPI():
     def __init__(self):

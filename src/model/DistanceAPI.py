@@ -1,13 +1,13 @@
-import  requests
+import requests
 import json
-import Constants as C
+from model.DB import Constants
 
 class DistanceAPI():
     def __init__(self):
-        pass
+        self.C = Constants()
 
-    def apiCall ():
-        response = requests.get(C.TIME_FILTER)
+    def apiCall (self):
+        response = requests.get(self.C.TIME_FILTER)
         print (response.text)
         return response.text
 
