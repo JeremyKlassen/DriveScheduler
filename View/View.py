@@ -13,14 +13,14 @@ class View():
             if choice == '1':
                 fName = input("enter client first name: ")
                 lName = input("enter client last name: ")
-                pc = input("enter client postalcode (6 characters exactly with uppercase letters): ")
-                t = (lName, fName, pc, 0, 0)
+                add = input("enter client Address (address city province): ")
+                t = (lName, fName, add, 0, 0)
                 clients.append(t)
             elif choice == '2':
                 fName = input("enter driver first name: ")
                 lName = input("enter driver last name: ")
-                pc = input("enter client postalcode (6 characters exactly with uppercase letters): ")
-                t = (lName, fName, pc, 0, 0)
+                add = input("enter client Address: ")
+                t = (lName, fName, add, 0, 0)
                 drivers.append(t)
             elif choice == '3':
                 looper = False
@@ -30,6 +30,6 @@ class View():
         print("If no change is required then leave entry blank")
         newAPI_ID = input("Enter Travel Time App ID: ")
         newAPI_KEY = input("Enter Travel Time Key: ")
-        newPC_KEY = input("Enter Open Weather App Key: ")
-        values = ["0", newAPI_ID, "1", newAPI_KEY, "2", newPC_KEY]
+        newPS_KEY = input("Enter Position Stack Key: ")
+        values = ["API_ID", newAPI_ID, "API_KEY", newAPI_KEY, "PC_KEY", newPS_KEY]
         return values
