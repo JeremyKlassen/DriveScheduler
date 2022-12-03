@@ -20,9 +20,9 @@ class DB():
         c = conn.cursor()
 
         if clients:
-            c.execute('INSERT INTO clients VALUES (?,?,?,0,0)', clients)
+            c.execute('INSERT INTO clients VALUES (?,?,?,?,?)', clients)
         if drivers:
-            c.execute('INSERT INTO drivers VALUES (?,?,?,0,0)', drivers)
+            c.execute('INSERT INTO drivers VALUES (?,?,?,?,?)', drivers)
 
         conn.commit()
         conn.close()
@@ -48,26 +48,25 @@ class DB():
         conn.close()
 
     def changeKey(self,keys):
-        print(keys)
         conn = sqlite3.connect(self.C.DBPATH)
         c = conn.cursor()
 
-        if not keys[0]:
+        if keys[0]:
             c.execute(''' DELETE FROM keys
                 WHERE keyType = 'API_ID'; ''')
-            c.execute('INSERT INTO keys VALUES (?)', keys[0])
+            c.execute('INSERT INTO keys VALUES (?,?)', [keys[0],keys[1]])
             self.C.API_ID = keys[0]
 
-        if not keys[1]:
+        if keys[1]:
             c.execute(''' DELETE FROM keys
                 WHERE keyType = 'API_KEY'; ''')
-            c.execute('INSERT INTO keys VALUES (?)', keys[1])
+            c.execute('INSERT INTO keys VALUES (?,?)', [keys[2],keys[3]])
             self.C.API_ID = keys[1]
 
-        if not keys[2]:
+        if keys[2]:
             c.execute(''' DELETE FROM keys
                 WHERE keyType = 'PC_KEY'; ''')
-            c.execute('INSERT INTO keys VALUES (?)', keys[2])
+            c.execute('INSERT INTO keys VALUES (?,?)', [keys[4],keys[5]])
             self.C.PC_Key = keys[2]
 
         conn.commit()
@@ -112,7 +111,7 @@ if __name__ == '__main__':
     db = DB()
     test = db.getAPIKeys
     print(test)
-    # db.createDB()
-    # client = ['Teddy','Roosevelt','R2K']
-    # driver = ['Joe','Biden','R3L']
-    # db.addUsers(clients = client, drivers = driver)
+    db.createDB()
+    client = ['Teddy','Roosevelt','R2K']
+    driver = ['Joe','Biden','R3L']
+    db.addUsers(clients = client, drivers = driver)

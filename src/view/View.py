@@ -31,4 +31,5 @@ class View():
         newAPI_ID = input("Enter Travel Time App ID: ")
         newAPI_KEY = input("Enter Travel Time Key: ")
         newPC_KEY = input("Enter Open Weather App Key: ")
-        return [newAPI_ID,newAPI_KEY,newPC_KEY]
+        values = ["0", newAPI_ID, "1", newAPI_KEY, "2", newPC_KEY]
+        return values

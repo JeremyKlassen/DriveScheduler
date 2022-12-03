@@ -24,5 +24,5 @@ class Controller:
 
 if __name__ == '__main__':
     cont = Controller()
-    # cont.triggerCreateDB()
+    cont.triggerCreateDB()
     cont.triggerChangeKeys()
