@@ -20,7 +20,8 @@ class Controller:
         self.DB.createDB()
 
     def triggerPSConverterAPI(self):
-        self.PS.APICall()
+        coords = self.PS.APICall("528 Wellington Ave Winnipeg Manitoba")
+        
 
 
 if __name__ == '__main__':

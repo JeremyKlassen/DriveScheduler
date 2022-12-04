@@ -12,8 +12,16 @@ class DB():
         c = conn.cursor()
         c.execute('SELECT * FROM keys;')
         newKeys = c.fetchall()
-        print(newKeys)
         return newKeys
+
+    def getUser(self,table,id):
+        sql = "SELECT * FROM " + table + " WHERE id = " + id
+        conn = sqlite3.connect(self.C.DBPATH)
+        c = conn.cursor()
+        c.execute(sql)
+        ret = c.fetchall()
+        conn.close()
+        return ret
 
 # Functionality Methods
     def addUsers(self, clients, drivers):
@@ -21,9 +29,9 @@ class DB():
         c = conn.cursor()
 
         if clients:
-            c.execute('INSERT INTO clients VALUES (?,?,?,?,?)', clients)
+            c.execute('INSERT INTO clients VALUES (?,?,?,?,?,?)', clients)
         if drivers:
-            c.execute('INSERT INTO drivers VALUES (?,?,?,?,?)', drivers)
+            c.execute('INSERT INTO drivers VALUES (?,?,?,?,?,?)', drivers)
 
         conn.commit()
         conn.close()
@@ -37,14 +45,22 @@ class DB():
         conn = sqlite3.connect(self.C.DBPATH)
         c = conn.cursor()
         c.execute(''' CREATE TABLE clients
-            (lName text, fName text, pc text, lat text, long text)''')
+            (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, pc TEXT, lat TEXT, long TEXT)''')
 
         c.execute(''' CREATE TABLE drivers
-            (lName text, fName text, pc text, lat text, long text)''')
+            (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, pc TEXT, lat TEXT, long TEXT)''')
 
         c.execute(''' CREATE TABLE keys
             (keyType text, key text)''')
 
+        conn.commit()
+        conn.close()
+
+    def updateUser(self,update, table, id):
+        sql = "UPDATE " + table + " SET lat = " + update[0] + ", long = " + update[1] + "WHERE id = " + id
+        conn = sqlite3.connect(self.C.DBPATH)
+        c = conn.cursor()
+        c.execute(sql)
         conn.commit()
         conn.close()
 

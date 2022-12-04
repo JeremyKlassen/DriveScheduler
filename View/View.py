@@ -19,7 +19,7 @@ class View():
             elif choice == '2':
                 fName = input("enter driver first name: ")
                 lName = input("enter driver last name: ")
-                add = input("enter client Address: ")
+                add = input("enter client Address (address city province): ")
                 t = (lName, fName, add, 0, 0)
                 drivers.append(t)
             elif choice == '3':
