@@ -21,11 +21,13 @@ class Controller:
 
     def triggerPSConverterAPI(self):
         coords = self.PS.APICall("528 Wellington Ave Winnipeg Manitoba")
-        
+
 
 
 if __name__ == '__main__':
-    cont = Controller()
-    cont.triggerPSConverterAPI()
+    # cont = Controller(self)
+    con = C.Constants()
+    print(con.API_KEY)
+    # cont.triggerPSConverterAPI()
     # cont.triggerCreateDB()
     # cont.triggerChangeKeys()

@@ -1,14 +1,17 @@
+import json
+
 class Constants():
     def __init__(self):
-        pass
+        f = open('Model/DB/keys.json')
+        data = json.load(f)
+        self.API_ID = data['API_ID']
+        self.API_KEY = data['API_KEY']
+        self.PS_KEY = data['PS_KEY']
 
     # API constants
     BASE_URL = "https://api.traveltimeapp.com/v4/routes/V4/routes"
-    API_ID = "e4519f0a"
-    API_KEY = "db04e55a43e11768c3ba45fba5736975"
-    PS_KEY = "c07c7bfcb81f2bd43816f86683976410"
-    PS_URL = f"""http://api.positionstack.com/v1/forward\
-?access_key={PS_KEY}"""
+    # PS_URL = f"""http://api.positionstack.com/v1/forward\
+# ?access_key={PS_KEY}"""
 
     # Database constants
     DBPATH = 'Model/DB/main.db'
@@ -29,6 +32,7 @@ class Constants():
     &arrival_time=2022-11-18T16:00:00Z\
     &search_lat=51.41070\
     &search_lng=-0.15540\
-    &locations=51.45974_-0.16531,51.41494_-0.12492\
-    &app_id={API_ID}\
-    &api_key={API_KEY}"""
+    &locations=51.45974_-0.16531,51.41494_-0.12492"""
+
+    # &app_id={API_ID}\
+    # &api_key={API_KEY}"""
