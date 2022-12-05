@@ -1,12 +1,23 @@
 import json
+import sqlite3
 
 class Constants():
     def __init__(self):
-        f = open('Model/DB/keys.json')
-        data = json.load(f)
-        self.API_ID = data['API_ID']
-        self.API_KEY = data['API_KEY']
-        self.PS_KEY = data['PS_KEY']
+        self.conn = sqlite3()
+        self.c = self.conn.connect()
+        self.API_ID = self.getDBValue('key', 'keys', 'keyType', 'API_ID')
+        self.API_KEY = self.getDBValue('key', 'keys', 'keyType', 'API_KEY')
+        self.PS_KEY = self.getDBValue('key', 'keys', 'keyType', 'PS_KEY')
+
+    def getDBValue(self, column, table, column2, value):   
+        sql = "SELECT " + column + " FROM " + table + " WHERE " + column2 + " = " + value + ";"
+        self.c.execute(sql)
+        data = self.c.fetchall()
+        if not data:
+            f = open('Model/DB/keys.json')
+            jData = json.load(f)
+            data = jData[value]
+        return data
 
     # API constants
     BASE_URL = "https://api.traveltimeapp.com/v4/routes/V4/routes"
@@ -33,6 +44,3 @@ class Constants():
     &search_lat=51.41070\
     &search_lng=-0.15540\
     &locations=51.45974_-0.16531,51.41494_-0.12492"""
-
-    # &app_id={API_ID}\
-    # &api_key={API_KEY}"""

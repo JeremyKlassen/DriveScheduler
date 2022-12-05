@@ -25,10 +25,7 @@ class Controller:
 
 
 if __name__ == '__main__':
-    # cont = Controller(self)
-    con = C.Constants()
-    print(con.API_KEY)
-    # cont.triggerPSConverterAPI()
-    # cont.triggerCreateDB()
-    # cont.triggerChangeKeys()
-    # test
+    cont = Controller()
+    cont.DB.createDB()
+
+    # print(con.API_KEY)

@@ -12,7 +12,7 @@ The minimum features this project will include are:
 
 ---
 ### Potential Additional Features (in order of need)
-- Optionally outputs a list based on drive time instead of drive distance.
+- O ptionally outputs a list based on drive time instead of drive distance.
 - GUI for Pythonista (IOS). So that the script can be optimally run from a cellphone.
 - Read data into database from .csv or spreadsheet files.
 - Ability to set specific driver/client pairs before calculating a schedule.

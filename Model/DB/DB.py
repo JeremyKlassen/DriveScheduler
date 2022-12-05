@@ -23,9 +23,9 @@ class DB():
 # Functionality Methods
     def addUsers(self, clients, drivers):
         if clients:
-            self.c.execute('INSERT INTO clients VALUES (?,?,?,?,?,?)', clients)
+            self.c.execute('INSERT OR IGNORE INTO clients VALUES (?,?,?,?,?,?)', clients)
         if drivers:
-            self.c.execute('INSERT INTO drivers VALUES (?,?,?,?,?,?)', drivers)
+            self.c.execute('INSERT OR IGNORE INTO drivers VALUES (?,?,?,?,?,?)', drivers)
 
         self.conn.commit()
 
@@ -37,6 +37,8 @@ class DB():
             (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, pc TEXT, lat TEXT, long TEXT)''')
         self.c.execute(''' CREATE TABLE IF NOT EXISTS keys
             (keyType text, key text)''')
+        self.c.execute(''' CREATE TABLE IF NOT EXISTS distances
+            (id INTEGER PRIMARY KEY AUTOINCREMENT, distance INTEGER, clientId INTEGER, driverId INTEGER)''')
 
         self.conn.commit()
 
