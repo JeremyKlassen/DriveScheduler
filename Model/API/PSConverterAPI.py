@@ -1,15 +1,17 @@
 import json
 import requests
-from Model.DB import Constants as C
+from Model.DB import Constants
+
+# returns coordinates from a user inputed address string
 
 class PSConverterAPI():
     def __init__(self):
-        self.C = C.Constants()
+        self.Constants = Constants.Constants()
 
     def APICall(self, address):
         try:
             #make call
-            url = self.C.PS_URL + "&query=" + address
+            url = self.Constants.PS_URL + "&query=" + address
             response = requests.get(url)
 
             #parse response down to lat and long

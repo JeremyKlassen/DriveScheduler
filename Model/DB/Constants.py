@@ -3,20 +3,27 @@ import sqlite3
 
 class Constants():
     def __init__(self):
-        self.conn = sqlite3()
-        self.c = self.conn.connect()
-        self.API_ID = self.getDBValue('key', 'keys', 'keyType', 'API_ID')
-        self.API_KEY = self.getDBValue('key', 'keys', 'keyType', 'API_KEY')
-        self.PS_KEY = self.getDBValue('key', 'keys', 'keyType', 'PS_KEY')
+        self.conn = sqlite3.connect('Model/DB/main.db')
+        self.cur = self.conn.cursor()
+        self.API_ID = self.getKeyValue('key', 'keys', 'keyType', 'API_ID')
+        self.API_KEY = self.getKeyValue('key', 'keys', 'keyType', 'API_KEY')
+        self.PS_KEY = self.getKeyValue('key', 'keys', 'keyType', 'PS_KEY')
 
-    def getDBValue(self, column, table, column2, value):   
+    def getKeyValue(self, column, table, column2, value):   
         sql = "SELECT " + column + " FROM " + table + " WHERE " + column2 + " = " + value + ";"
-        self.c.execute(sql)
-        data = self.c.fetchall()
+        try:
+            self.cur.execute(sql)
+        except:
+            pass
+        data = self.cur.fetchall()
         if not data:
-            f = open('Model/DB/keys.json')
-            jData = json.load(f)
-            data = jData[value]
+            try:
+                f = open('Model/DB/keys.json')
+                jData = json.load(f)
+                data = jData[value]
+            except:
+                print("No keys found in main.db or keys.json")
+                return
         return data
 
     # API constants

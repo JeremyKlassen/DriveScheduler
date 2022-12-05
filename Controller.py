@@ -1,19 +1,18 @@
 from Model.DB import DB
-from Model.DB import Constants as C
+from Model.DB import Constants
 import Model.API.DistanceAPI as DApi
 import Model.API.PSConverterAPI as PSApi
-
-from View import View as V
+from View import View
 
 class Controller:
     def __init__(self):
-        self.C = C.Constants()
+        self.Constants = Constants.Constants()
         self.DB = DB.DB()
-        self.V = V.View()
+        self.View = View.View()
         self.PS = PSApi.PSConverterAPI()
 
     def triggerChangeKeys(self):
-        keys = self.V.changeKeysView()
+        keys = self.View.changeKeysView()
         self.DB.changeKey(keys)
 
     def triggerCreateDB(self):
