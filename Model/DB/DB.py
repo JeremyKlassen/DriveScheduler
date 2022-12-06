@@ -24,7 +24,6 @@ class DB():
 
 # DB Creation
     def createDB(self):
-
         self.cur.execute(''' CREATE TABLE IF NOT EXISTS clients
             (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, pc TEXT, lat TEXT, long TEXT)''')
         self.cur.execute(''' CREATE TABLE IF NOT EXISTS drivers
@@ -49,8 +48,9 @@ class DB():
 
     def addKeys(self, keys, keyIds):
         for i in range(0, len(keys)):
-            sql = "INSERT OR IGNORE INTO keys VALUES ('" + keyIds[i] + "', '" + keys[i] + "';"
-            self.c.execute(sql)
+            sql = "INSERT OR IGNORE INTO keys VALUES ('" + keyIds[i] + "', '" + keys[i] + "');"
+            print(sql)
+            self.cur.execute(sql)
         self.conn.commit()
 
 
@@ -61,22 +61,22 @@ class DB():
 
 
     def changeKey(self,keys):
-
-        if keys[0]:
-            self.cur.execute(''' DELETE FROM keys
-                WHERE keyType = 'API_ID'; ''')
-            self.cur.execute('INSERT INTO keys VALUES (?,?)', [keys[0],keys[1]])
-            self.Constants.API_ID = keys[0]
-        if keys[1]:
-            self.cur.execute(''' DELETE FROM keys
-                WHERE keyType = 'API_KEY'; ''')
-            self.cur.execute('INSERT INTO keys VALUES (?,?)', [keys[2],keys[3]])
-            self.Constants.API_ID = keys[1]
-        if keys[2]:
-            self.cur.execute(''' DELETE FROM keys
-                WHERE keyType = 'PC_KEY'; ''')
-            self.cur.execute('INSERT INTO keys VALUES (?,?)', [keys[4],keys[5]])
-            self.Constants.PC_Key = keys[2]
+        for key, i in keys, range(0,len(keys)):
+            if key == 'API_ID':
+                self.cur.execute(''' DELETE FROM keys
+                    WHERE keyType = 'API_ID'; ''')
+                self.cur.execute('INSERT INTO keys VALUES (?,?)', [key,keys[i+1]])
+                self.Constants.API_ID = key
+            if key == 'API_KEY':
+                self.cur.execute(''' DELETE FROM keys
+                    WHERE keyType = 'API_KEY'; ''')
+                self.cur.execute('INSERT INTO keys VALUES (?,?)', [key,keys[i+1]])
+                self.Constants.API_ID = key
+            if key == 'PC_KEY':
+                self.cur.execute(''' DELETE FROM keys
+                    WHERE keyType = 'PC_KEY'; ''')
+            self.cur.execute('INSERT INTO keys VALUES (?,?)', [key,keys[i+1]])
+            self.Constants.PC_Key = key
 
         self.conn.commit()
 

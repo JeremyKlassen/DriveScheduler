@@ -5,17 +5,17 @@ class Constants():
     def __init__(self):
         self.conn = sqlite3.connect('Model/DB/main.db')
         self.cur = self.conn.cursor()
-        self.API_ID = self.getKeyValue('key', 'keys', 'keyType', 'API_ID')
-        self.API_KEY = self.getKeyValue('key', 'keys', 'keyType', 'API_KEY')
-        self.PS_KEY = self.getKeyValue('key', 'keys', 'keyType', 'PS_KEY')
+        # self.API_ID = self.getKeyValue('key', 'keys', 'keyType', 'API_ID')
+        # self.API_KEY = self.getKeyValue('key', 'keys', 'keyType', 'API_KEY')
+        # self.PS_KEY = self.getKeyValue('key', 'keys', 'keyType', 'PS_KEY')
 
     def getKeyValue(self, column, table, column2, value):   
-        sql = "SELECT " + column + " FROM " + table + " WHERE " + column2 + " = " + value + ";"
+        sql = "SELECT " + column + " FROM " + table + " WHERE " + column2 + " = '" + value + "';"
         try:
             self.cur.execute(sql)
         except:
             pass
-        data = self.cur.fetchall()
+        data = self.cur.fetchone()
         if not data:
             try:
                 f = open('Model/DB/keys.json')
@@ -24,6 +24,7 @@ class Constants():
             except:
                 print("No keys found in main.db or keys.json")
                 return
+        
         return data
 
     # API constants
