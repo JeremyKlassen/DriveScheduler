@@ -20,14 +20,25 @@ class DB():
         ret = self.cur.fetchall()
         return ret
 
+    def getPSConverterInfo(self):
+        sql = "SELECT id, address FROM clients;"
+        self.cur.execute(sql)
+        clients = self.cur.fetchall()
+        sql = "SELECT id, address FROM drivers;"
+        self.cur.execute(sql)
+        drivers = self.cur.fetchall()
+        return (clients,drivers)
+        
+
+
 # Functionality Methods
 
 # DB Creation
     def createDB(self):
         self.cur.execute(''' CREATE TABLE IF NOT EXISTS clients
-            (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, pc TEXT, lat TEXT, long TEXT)''')
+            (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, address TEXT, lat TEXT, long TEXT)''')
         self.cur.execute(''' CREATE TABLE IF NOT EXISTS drivers
-            (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, pc TEXT, lat TEXT, long TEXT)''')
+            (id INTEGER PRIMARY KEY AUTOINCREMENT, lName TEXT, fName TEXT, address TEXT, lat TEXT, long TEXT)''')
         self.cur.execute(''' CREATE TABLE IF NOT EXISTS keys
             (keyType text, key text)''')
         self.cur.execute(''' CREATE TABLE IF NOT EXISTS distances
@@ -38,10 +49,9 @@ class DB():
 #Setting data
 
     def addUsers(self, clients, drivers):
-        if clients:
-            self.cur.execute('INSERT OR IGNORE INTO clients VALUES (?,?,?,?,?,?)', clients)
-        if drivers:
-            self.cur.execute('INSERT OR IGNORE INTO drivers VALUES (?,?,?,?,?,?)', drivers)
+        self.cur.execute('INSERT OR IGNORE INTO clients VALUES (?,?,?,"0","0")', (clients[0]),(clients[1]), (clients[2]))
+
+        self.cur.execute('INSERT OR IGNORE INTO drivers VALUES (?,?,?,"0","0")', (drivers[0]),(drivers[1]),(drivers[2]))
 
         self.conn.commit()
 
@@ -51,6 +61,11 @@ class DB():
             sql = "INSERT OR IGNORE INTO keys VALUES ('" + keyIds[i] + "', '" + keys[i] + "');"
             print(sql)
             self.cur.execute(sql)
+        self.conn.commit()
+
+    def addCoords(self, coords, id, table):
+        sql = "UPDATE TABLE " + table + " SET lat = '" + coords[0] + "', long = '" + coords[1] + "' WHERE id = '" + id + "'"
+        self.cur.execute(sql)
         self.conn.commit()
 
 

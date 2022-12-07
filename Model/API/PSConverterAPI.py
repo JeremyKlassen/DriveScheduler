@@ -22,7 +22,7 @@ class PSConverterAPI():
             long = data2["longitude"]
             print(lat)
             print(long)
-            return {lat,long}
+            return (lat,long)
         except:
             print("There was an issue with the request")
             return {0,0}

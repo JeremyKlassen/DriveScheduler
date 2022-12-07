@@ -19,8 +19,11 @@ class Controller:
         self.DB.createDB()
 
     def triggerPSConverterAPI(self):
+
+        self.DB.addUsers()
         coords = self.PS.APICall("528 Wellington Ave Winnipeg Manitoba")
-        print(coords)
+        self.DB.addCoords(coords, )
+
 
 
 
@@ -35,6 +38,10 @@ if __name__ == '__main__':
         keyIDs = ('API_KEY', 'API_ID', 'PS_KEY')
         cont.DB.addKeys(keys,keyIDs)
     
-    copyKeysToDB()
+    # copyKeysToDB()
+    clients = ('jeremy','klassen','1528 Ross Ave')
+    drivers = ('jeremy','klassen','1528 Ross Ave')
+    cont.DB.addUsers(clients,drivers)
+
         
     
