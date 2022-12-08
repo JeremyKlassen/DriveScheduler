@@ -1,18 +1,17 @@
 # Drive Scheduler
 ---
-Drive Scheduler is a python project in development. It takes in a list of driver locations, and a list of client locations. It then calculates the optimal pickup pairings based on total distance or time.
----
-### Minimum Viable Product
-The first iteration's features are:
+Drive Scheduler is a python project in development. It will calculate optimal driver/client pairings based on their home locations. It is split into 3 main scripts.
 
-- A SQLite database that users can input data to, from the script. It has 4 tables (clients, drivers, distances and API keys).
-- The script will consume 2 APIs. One that will convert an address/location string into GPS coordinates, and one that will return drive distances between each driver coordinates (one) and all the listed clients' coordinates (many).
-- Create an algorithm that calculates and outputs a list of Driver/Client pairings that collectively require the least amount of drive distance for each client to be picked up.
+1 - coords - This script reads the address fields in the clients and drivers tables in the spreadsheet. It then sends API requests to get the Coordinates of that location and writes them back into the spreadsheet.
+
+2 - distance - This script reads the coordinates from each driver and client. It then calculates the distance between all clients and drivers, and writes them to the spreadsheet.
+
+3 - calculator - This Jupyter notebook takes all the distances and calculates the optimal drives.
 ---
-### Additional Features (in order of need) to include in future interations.
-- Optionally outputs a list based on drive time instead of drive distance.
-- Ability to set specific driver/client pairs and exclude specific drivers or clients before calculating a schedule.
-- Read data into database from .csv or spreadsheet files.
-- Expand the algorithm
-    - Calculates optimal drives that also average out mileage per driver over a week.
-- GUI for Pythonista (IOS). So that the script can run from a cellphone.
+### Possible future additions (in order of implementation)
+
+- Can calculate drives based on time instead of distance.
+- Allow user to set specific client/driver pairings before calculation.
+- Calculate a weeks worth of drives.
+- Track rough mileage allocated to drivers over time.
+- Calculate optimal pairings for a drive home from a specific location.
