@@ -19,7 +19,7 @@ driversLength = len(drivers.index)
 #iterate over clients dataframe to put coordinates into dataframe
 def iterClients():
     for i in range(0,clientsLength):
-        if numpy.nan(clients.iloc[i]['lat']) and numpy.nan(clients.iloc[i]['long']):
+        if numpy.any(clients.iloc[i]['lat']) and numpy.any(clients.iloc[i]['long']):
             address = clients.loc[i]['address']
             url = PS_URL + "&query=" + address + " Winnipeg Manitoba Canada"
             response = requests.get(url)
@@ -45,7 +45,7 @@ def iterClients():
 #iterate over drivers dataframe to put coordinates into dataframe
 def iterDrivers():
     for i in range(0,driversLength):
-        if numpy.nan(drivers.iloc[i]['lat']) and numpy.nan(drivers.iloc[i]['long']) :
+        if numpy.any(drivers.iloc[i]['lat']) and numpy.any(drivers.iloc[i]['long']) :
             address = drivers.loc[i]['address']
             url = PS_URL + "&query=" + address + " Winnipeg Manitoba Canada"
             response = requests.get(url)
@@ -68,16 +68,12 @@ def iterDrivers():
         else:
             print("There already exists coordinates for " + drivers.iloc[i]['fName'] + " " + drivers.iloc[i]['lName'])
 
-for i in range(0,clientsLength):
-    # lat = clients.iloc[i]['lat']
-    # long = clients.iloc[i]['long']
-    if numpy.isnan(clients.iloc[i]['lat']) or numpy.isnan(clients.iloc[i]['long']):
-        print("no coords")
-    else:
-        print("coords")
-
 #write coordinates found into client and drivers spreadsheets.
 def WritePD():
     with pd.ExcelWriter('data.xlsx', engine="openpyxl",if_sheet_exists="replace", mode="a") as writer:
         clients.to_excel(writer, sheet_name='clients', index=False)
         drivers.to_excel(writer, sheet_name='drivers', index=False)
+
+iterClients()
+iterDrivers()
+WritePD()

@@ -1,17 +1,4 @@
 {"results": [
-        {"search_id": "arrival  search example", "locations": [
-                {"id": "Hyde Park", "properties": [
-                        {"travel_time": 803, "distance": 3693
-                        }
-                    ]
-                },
-                {"id": "ZSL London Zoo", "properties": [
-                        {"travel_time": 995, "distance": 4396
-                        }
-                    ]
-                }
-            ], "unreachable": []
-        },
         {"search_id": "departure search example", "locations": [
                 {"id": "Hyde Park", "properties": [
                         {"travel_time": 676, "distance": 3638

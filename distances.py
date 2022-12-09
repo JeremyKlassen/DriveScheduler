@@ -5,6 +5,7 @@ import pandas as pd
 import numpy   
 import os
 import traveltimepy as ttpy
+import copy
 
 # Declaring Variables
 clients = pd.read_excel('data.xlsx', sheet_name='clients')
@@ -16,34 +17,46 @@ API_ID = keys.iloc[2]['api']
 
 os.environ["TRAVELTIME_ID"] = API_ID
 os.environ["TRAVELTIME_KEY"] = API_KEY
+locations = []
 
-locations = [
-  {"id": "London center", "coords": {"lat": 51.508930, "lng": -0.131387}},
-  {"id": "Hyde Park", "coords": {"lat": 51.508824, "lng": -0.167093}},
-  {"id": "ZSL London Zoo", "coords": {"lat": 51.536067, "lng": -0.153596}}
-]
+# Build out locations array
+for row in clients.iterrows():
+  id = row[1][0]
+  lat = row[1][4]
+  long = row[1][5]
+  coords = {"lat":lat,"lng":long}
+  nextLoc = {"id":id,"coords":coords}
+  locations.append(nextLoc)
 
-departure_search = {
-  "id": "departure search example",
-  "departure_location_id": "London center",
-  "arrival_location_ids": ["Hyde Park", "ZSL London Zoo"],
-  "transportation": {"type": "driving"},
-  "departure_time":  datetime.now(timezone.utc).isoformat(),
-  "properties": ["travel_time", "distance"]
-}
+for row in drivers.iterrows():
+  id = row[1][0]
+  lat = row[1][4]
+  long = row[1][5]
+  coords = {"lat":lat,"lng":long}
+  nextLoc = {"id":id,"coords":coords}
+  locations.append(nextLoc)
 
-arrival_search = {
-  "id": "arrival  search example",
-  "departure_location_ids": ["Hyde Park", "ZSL London Zoo"],
-  "arrival_location_id": "London center",
-  "transportation": {"type": "driving"},
-  "arrival_time":  datetime.now(timezone.utc).isoformat(),
-  "properties": ["travel_time", "distance"],
-  "range": {"enabled": True, "max_results": 1, "width": 1800}
-}
 
-out = ttpy.routes(
-  locations=locations, departure_searches=departure_search, arrival_searches=arrival_search)
+for row in drivers.iterrows():
+  arrivalLocations = copy.deepcopy(locations)
+  arrivalLocations.remove(row[1][0])
 
-print(type(out))
-print(out)
+
+  departure_search = {
+    "id": "drives",
+    "departure_location_id": row[1][0],
+    "arrival_location_ids": locations,
+    "transportation": {"type": "driving"},
+    "departure_time":  datetime.now(timezone.utc).isoformat(),
+    "properties": ["travel_time", "distance"]
+  }
+
+def apiCall():
+  out = ttpy.routes(
+    locations=locations, departure_searches=departure_search)
+
+  data = out['results'][0]['locations']
+  print(type(data))
+  print(data)
+  print(data[0])
+  print(data[1])
