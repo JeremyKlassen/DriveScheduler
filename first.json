@@ -1,109 +1,36 @@
-{"results": [
-        {"search_id": "arrival  search example", "locations": [
-                {"id": "Hyde Park", "properties": [
-                        {"travel_time": 1437, "distance": 854, "fares": {"breakdown": [
-                                    {"modes": ["bus"
-                                        ], "route_part_ids": [
-                                            5
-                                        ], "tickets": [
-                                            {"type": "single", "price": 1.5, "currency": "GBP"
-                                            }
-                                        ]
-                                    },
-                                    {"modes": ["bus"
-                                        ], "route_part_ids": [
-                                            6
-                                        ], "tickets": [
-                                            {"type": "single", "price": 1.5, "currency": "GBP"
-                                            }
-                                        ]
-                                    },
-                                    {"modes": ["bus"
-                                        ], "route_part_ids": [
-                                            6,
-                                            5
-                                        ], "tickets": [
-                                            {"type": "week", "price": 21, "currency": "GBP"
-                                            },
-                                            {"type": "month", "price": 80.7, "currency": "GBP"
-                                            },
-                                            {"type": "year", "price": 840, "currency": "GBP"
-                                            }
-                                        ]
-                                    }
-                                ], "tickets_total": [
-                                    {"type": "week", "price": 21, "currency": "GBP"
-                                    },
-                                    {"type": "month", "price": 80.7, "currency": "GBP"
-                                    },
-                                    {"type": "year", "price": 840, "currency": "GBP"
-                                    },
-                                    {"type": "single", "price": 3, "currency": "GBP"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {"id": "ZSL London Zoo", "properties": [
-                        {"travel_time": 1814, "distance": 821, "fares": {"breakdown": [
-                                    {"modes": ["bus"
-                                        ], "route_part_ids": [
-                                            5
-                                        ], "tickets": [
-                                            {"type": "single", "price": 1.5, "currency": "GBP"
-                                            }
-                                        ]
-                                    },
-                                    {"modes": ["bus"
-                                        ], "route_part_ids": [
-                                            6
-                                        ], "tickets": [
-                                            {"type": "single", "price": 1.5, "currency": "GBP"
-                                            }
-                                        ]
-                                    },
-                                    {"modes": ["bus"
-                                        ], "route_part_ids": [
-                                            5,
-                                            6
-                                        ], "tickets": [
-                                            {"type": "week", "price": 21, "currency": "GBP"
-                                            },
-                                            {"type": "month", "price": 80.7, "currency": "GBP"
-                                            },
-                                            {"type": "year", "price": 840, "currency": "GBP"
-                                            }
-                                        ]
-                                    }
-                                ], "tickets_total": [
-                                    {"type": "week", "price": 21, "currency": "GBP"
-                                    },
-                                    {"type": "month", "price": 80.7, "currency": "GBP"
-                                    },
-                                    {"type": "year", "price": 840, "currency": "GBP"
-                                    },
-                                    {"type": "single", "price": 3, "currency": "GBP"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            ], "unreachable": []
-        },
-        {"search_id": "departure search example", "locations": [
-                {"id": "Hyde Park", "properties": [
-                        {"travel_time": 676, "distance": 3638
-                        }
-                    ]
-                },
-                {"id": "ZSL London Zoo", "properties": [
-                        {"travel_time": 888, "distance": 4112
-                        }
-                    ]
-                }
-            ], "unreachable": []
-        }
-    ]
-}
+{'distances': [
+        [
+            0,
+            660,
+            632
+        ],
+        [
+            1147,
+            0,
+            1381
+        ],
+        [
+            632,
+            868,
+            0
+        ]
+    ], 'times': [
+        [
+            0,
+            203,
+            202
+        ],
+        [
+            408,
+            0,
+            348
+        ],
+        [
+            202,
+            278,
+            0
+        ]
+    ], 'info': {'copyrights': ['GraphHopper', 'OpenStreetMap contributors'
+        ]
+    }
+}   
