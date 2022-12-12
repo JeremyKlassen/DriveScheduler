@@ -21,7 +21,7 @@ def iterClients():
     for i in range(0,clientsLength):
         if numpy.any(clients.iloc[i]['lat']) and numpy.any(clients.iloc[i]['long']):
             address = clients.loc[i]['address']
-            url = PS_URL + "&query=" + address + " Winnipeg Manitoba Canada"
+            url = PS_URL + "&query=Canada " + address
             response = requests.get(url)
             data = json.loads(response.text)
             data1 = data['data']
@@ -34,7 +34,7 @@ def iterClients():
                 fName = clients.iloc[i]['fName']
                 lName = clients.iloc[i]['lName']
                 print("low confidence in this result for " + fName + " " + lName + ". Please enter the coordinates: ")
-                print(lat + " " + long)
+                print(f"{lat} {long}")
                 print("into google maps to verify correct location.")
 
             clients.at[i, 'lat'] = lat
