@@ -7,6 +7,7 @@ Drive Scheduler is a python project in development. It will calculate optimal dr
 2 - distance - This script reads the coordinates from each driver and client. It then calculates the distance between all clients and drivers, and writes them to the spreadsheet.
 
 3 - calculator - This Jupyter notebook takes all the distances and calculates the optimal drives.
+
 ---
 ### Possible future additions (in order of implementation)
 
