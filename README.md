@@ -17,3 +17,4 @@ Drive Scheduler is a python project in development. It will calculate optimal dr
 - Track rough mileage allocated to drivers over time.
 - Calculate optimal pairings for a drive home from a specific location.
 - Create a script for use on a mobile device (either a Pythonista app, or a mobile compatible Jupyter notebook)
+- Update README.md
