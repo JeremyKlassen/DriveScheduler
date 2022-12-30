@@ -25,18 +25,23 @@ def iterClients():
             url = PS_URL + "&query=Canada " + address
             response = requests.get(url)
             data = json.loads(response.text)
-            data1 = data['data']
-            data2 = data1[0]
-            print(type(data2["latitude"]))
-            lat = data2["latitude"]
-            long = data2["longitude"]
-            confidence = data2["confidence"]
+            try:
+                data1 = data['data']
+                data2 = data1[0]
+                lat = data2["latitude"]
+                long = data2["longitude"]
+                confidence = data2["confidence"]
+            except:
+                confidence = 0
+                lat = 0
+                long = 0
+
             if confidence < 0.8:
                 fName = clients.iloc[i]['fName']
                 lName = clients.iloc[i]['lName']
-                print("low confidence in this result for " + fName + " " + lName + ". Please enter the coordinates: ")
-                print(f"{lat} {long}")
-                print("into google maps to verify correct location.")
+                # print("low confidence in this result for " + fName + " " + lName + ". Please enter the coordinates: ")
+                # print(f"{lat} {long}")
+                # print("into google maps to verify correct location.")
 
             clients.at[i, 'lat'] = lat
             clients.at[i, 'long'] = long
@@ -51,18 +56,23 @@ def iterDrivers():
             url = PS_URL + "&query=" + address + " Winnipeg Manitoba Canada"
             response = requests.get(url)
             data = json.loads(response.text)
-            data1 = data['data']
-            data2 = data1[0]
-            lat = data2["latitude"]
-            long = data2["longitude"]
-            confidence = data2["confidence"]
+            try:
+                data1 = data['data']
+                data2 = data1[0]
+                lat = data2["latitude"]
+                long = data2["longitude"]
+                confidence = data2["confidence"]
+            except:
+                confidence = 0
+                lat = 0
+                long = 0
 
             if confidence < 0.8:
                 fName = drivers.iloc[i]['fName']
                 lName = drivers.iloc[i]['lName']
-                print("low confidence in this result for " + fName + " " + lName + ". Please enter the coordinates: ")
-                print(lat + " " + long)
-                print("into google maps to verify correct location.")
+                # print("low confidence in this result for " + fName + " " + lName + ". Please enter the coordinates: ")
+                # print(lat + " " + long)
+                # print("into google maps to verify correct location.")
 
             drivers.at[i, 'lat'] = lat
             drivers.at[i, 'long'] = long
