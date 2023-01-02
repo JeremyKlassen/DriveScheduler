@@ -1,9 +1,16 @@
+# ignores
 __pycache__/
 *.db
 keys.json
 *.xlsx
 *.json
 OldCode/
+
+# unignores
+!template(see readme).xlsx
+
+
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
